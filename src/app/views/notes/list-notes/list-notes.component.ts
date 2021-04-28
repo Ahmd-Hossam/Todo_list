@@ -14,19 +14,26 @@ export class ListNotesComponent implements OnInit {
   items:any[]=[]
   itemId:any;
   searchText:string ='' //for filter
+   //paginaiotn
+   totalRecords:string=''
+   pageSize:number=5
+   page:number=1
   constructor(private auth:AuthService, private notes_ser:NotesService, private modal:NgbModal, private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.AllItems()
   }
 
- 
+  //pagination
+  pageChanged(event: any): void {
+    this.page=event
+  }
 
   
  
   //get all items
   AllItems(){
-    this.notes_ser.getAll().subscribe(
+    this.notes_ser.getpagination().subscribe(
       res=>{
         this.items=res.data;
         // console.log(res); 

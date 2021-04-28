@@ -16,7 +16,10 @@ export class NotesService {
   getItem(id:any){
     return this.http.get<any>(`${env.api}/task/${id}`)
   }
- 
+  //get by pagination
+  getpagination(){  //?limit=5&skip=5`)
+    return this.http.get<any>(`https://api-nodejs-todolist.herokuapp.com/task?limit=100`)
+  }
   //add data
   add(data:any){
     return this.http.post<any>(`${env.api}/task`,data)

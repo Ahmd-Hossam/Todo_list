@@ -14,7 +14,12 @@
             </div>
         </div>
 
-        <div class="card" *ngFor="let item of items  | filter:searchText">
+        <div class="card" *ngFor='let item of items  | filter:searchText 
+          | paginate: { id: "notes",
+          itemsPerPage: pageSize,
+          currentPage: page,
+          totalItems: totalRecords  }'>
+
           <div class="card-body"   [style.padding]="'5px'">
             <h5 class='card-title' [style.font-size]="'16px'"> 
               <span class="span_title"> Date: <span class="child"> {{item.createdAt | slice:0:10}}  </span> </span> &nbsp; &nbsp;
@@ -32,7 +37,16 @@
     </div>
   </div>
 </section>
-
+  <!-- paginaion-->
+    <pagination-controls  id="notes"
+        (pageChange)="pageChanged($event)"
+        (pageBoundsCorrection)="pageChanged($event)"
+        previousLabel="Previous"
+        nextLabel="Next"  
+        screenReaderPaginationLabel="Pagination"
+        screenReaderPageLabel="page"
+        screenReaderCurrentLabel="You're on page">
+    </pagination-controls>
 
 <!-- add edit modal -->
 <ng-template #pop let-c="close" let-d="dismiss" >
